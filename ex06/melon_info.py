@@ -6,50 +6,47 @@ melon_info.py - Prints out all the melons in our inventory
 from melons import melon_name, melon_seedless, melon_price
 
 
-# for k, v in melon_name.iteritems():
-# 	melon_seedless[k].append(melon_seedless)
 
 
 
-
-# for key in melon_dict.keys():
-# 	if key in melon_seedless.keys():
-# 		melon_dict[key].append(melon_seedless[key])
-
-
-# print melon_dict
-
+catalogue = {}
+cantaloupe_dict = {}
+crenshaw_dict = {}
+crane_dict = {}
+casaba_dict = {}
+honey_dict = {}
 
 
 
-# for key in melon_dict.keys():
-# 	if key in melon_seedless:
-# 		melon_seedless[key] = [melon_seedless[key], melon_dict[key]]
-# 	else:
-# 		melon_seedless[key] = melon_dict[key]
+melon_name_list = []
+melon_seeds_list = []
+melon_price_list = []
 
-# print melon_dict
-
-
-# dicts = {melon_name, melon_seedless, melon_price}
-
-# print dicts
-
-# melon_dict = {}
-# for item in melon_name:
-# 	for k, v in melon_dict.iteritems():
+for k, v in melon_name.iteritems():
+	melon_name_list.append(v)
 
 
+cantaloupe_dict["price"] = [melon_price[1]]
+cantaloupe_dict["seedless"] = [melon_seedless[1]]
 
-	# def print_melon(name, seedless, price):
-	# 	hashasnot = 'have'
-	# 	if seedless:
-	# 		hashasnot = 'do not have'
-		
-	# 	print "%ss %s seeds and are $%0.2f" % ( name, hashasnot, price)
+crenshaw_dict['price'] = [melon_price[2]]
+crenshaw_dict["seedless"] = [melon_seedless[2]]
+
+crane_dict['price'] = [melon_price[3]]
+crane_dict["seedless"] = [melon_seedless[3]]
+
+casaba_dict['price'] = [melon_price[4]]
+casaba_dict["seedless"] = [melon_seedless[4]]
+
+honey_dict['price'] = [melon_price[5]]
+honey_dict["seedless"] = [melon_seedless[5]]
+
+catalogue["Cantaloupe"] = cantaloupe_dict
+catalogue["Crenshaw"] = crenshaw_dict
+catalogue["Crane"] = crane_dict
+catalogue['Honeydew'] = honey_dict
+catalogue['Casaba'] = casaba_dict
 
 
 
-# if __name__ == '__main__':
-#     for i in melon_name.keys():
-#         print_melon(melon_name[i], melon_seedless[i], melon_price[i])
+	
