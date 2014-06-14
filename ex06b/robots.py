@@ -37,7 +37,7 @@ class CleanerBot(Robot):
 class StickerBot(Robot):
     robot_name = "StickerBot"
     
-    def apply_logo(self, melon):
+    def apply_logo(self, melon): # applies stickers to 10% of melons
         if random.random() < .9:
             melon.stickers.append('UberMelon Logo')
         if random.random() < .9:
