@@ -2,7 +2,8 @@
 import robots
 from sys import argv
 
-class Melon(object):
+
+class FoodThing(object):
 
     def __init__(self, melon_type):
         self.melon_type = melon_type
@@ -19,6 +20,19 @@ class Melon(object):
             return self.melon_type
         else:
             return "%s %0.2fLB %s" % (self.color, self.weight, self.melon_type)
+
+
+class WinterSquash(FoodThing):
+
+    def prep(self):
+        robots.cleanerbot.clean(self)
+        robots.stickerbot.apply_logo(self)
+        robots.painterbot.paint(self)
+
+class Melon(FoodThing):
+    pass    # Is this an appropriate move? I don't want it to do anything different than 
+            # the parent class...
+
     
 
 def main():
@@ -42,13 +56,17 @@ def main():
                     print "ORDERS FAILED TO BE FULFILLED!"
                     sys.exit()
                 
-                m = Melon(melon_type)
+                if melon_type == "Winter Squash":
+                    m = WinterSquash(melon_type)
+                else:
+                    m = Melon(melon_type)
+
                 robots.pickerbot.pick(m)
                 count += 1
                 
                 m.prep()
                 
-                # paint all yellow melons 
+                # paint all yellow melons (should only be winter squash) green
                 robots.painterbot.paint(m)
 
                 # evaluate melon
@@ -59,37 +77,6 @@ def main():
                     robots.trashbot.trash(m)
                     continue
 
-
-    # f = open("standing_orders1.log")
-
-    # for line in f:
-    #     (melon_type, quantity) = line.rstrip().split(':')
-    #     quantity = int(quantity)
-        
-    #     count = 0
-    #     melons = []
-    #     while len(melons) < quantity:
-    #         if count > 200:
-    #             print "\nALL MELONS HAVE BEEN PICKED"
-    #             print "ORDERS FAILED TO BE FULFILLED!"
-    #             sys.exit()
-            
-    #         m = Melon(melon_type)
-    #         robots.pickerbot.pick(m)
-    #         count += 1
-            
-    #         m.prep()
-            
-    #         # paint all yellow melons 
-    #         robots.painterbot.paint(m)
-
-    #         # evaluate melon
-    #         presentable = robots.inspectorbot.evaluate(m)
-    #         if presentable:
-    #             melons.append(m)
-    #         else:
-    #             robots.trashbot.trash(m)
-    #             continue
 
         print "------"
         print "Robots Picked %d %s for order of %d" % (count, melon_type, quantity)
