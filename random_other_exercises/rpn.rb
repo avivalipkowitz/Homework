@@ -59,6 +59,7 @@ calc_item_int_list = []
 # check for appropriate number of arguments
 if calc_item_string_list.length < 3
 	puts "not enough arguments"
+	break
 end
 
 
@@ -78,8 +79,9 @@ for item in calc_item_string_list
 			for unit in item_sublist
 				# check for invalid numbers
 				if unit[0] < 42 or unit[0] > 57
-					puts "invalid number"
-					return "invalid number"
+					raise "invalid number"
+					
+
 				# check for negative numbers
 				elsif unit == "-"
 					negative = true
@@ -175,14 +177,14 @@ while calc_item_int_list.compact.length > 2:
 	puts "item is "
 	puts calc_item_int_list.at(i)
 	
-	if calc_item_int_list.at(i).is_a?(Integer) == true
+	if calc_item_int_list.compact.at(i).is_a?(Integer) == true
 		puts "item is integer"
 		i += 1
-	elsif calc_item_int_list.at(i).is_a?(String) == true
+	elsif calc_item_int_list.compact.at(i).is_a?(String) == true
 		puts "item is string"
-		operator = calc_item_int_list.at(i)
-		num1 = calc_item_int_list.at(i - 2) 
-		num2 = calc_item_int_list.at(i - 1)
+		operator = calc_item_int_list.compact.at(i)
+		num1 = calc_item_int_list.compact.at(i - 2) 
+		num2 = calc_item_int_list.compact.at(i - 1)
 		reinsertion_index = i - 2
 		puts "items of interest are #{num1}, #{num2}, #{operator}"
 
@@ -196,17 +198,24 @@ while calc_item_int_list.compact.length > 2:
 		puts calc_item_int_list
 		calc_item_int_list.compact
 		puts"list length after compacting is"
-		puts calc_item_int_list.length
+		puts calc_item_int_list.compact.length
 
 		# add indices to calc_sublist
 		calc_sublist << num1 << num2 << operator
+		puts "calc_sublist is"
+		puts calc_sublist
 
 		# resolve calc_sublist
 		result = resolve_rpn(calc_sublist)
+		puts "result is #{result}"
+
+		#reset calc_sublist
+		calc_sublist = []
 
 		# reinsert result to main list
-		calc_item_int_list.insert(3, result)
+		calc_item_int_list.insert(i - 2, result)
 		puts "list length is #{calc_item_int_list.length}"
+		puts "compact length is #{calc_item_int_list.compact.length}"
 		# reset i to start at the beginning again
 		i = reinsertion_index
 	end
